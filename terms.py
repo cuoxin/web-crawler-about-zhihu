@@ -28,7 +28,7 @@ def F_add(S, dic_):
             dic_[terms] = 1
 
 
-def F_run():
+def F_run(int_question_num):
 
     dic_termsFrequently = {}
 
@@ -36,7 +36,9 @@ def F_run():
     re_ed_tag = re.compile(str_re)
     str_re = r"<figure>.+</figure>"
     re_ed_img = re.compile(str_re)
-    with open("./data.csv", "r", encoding="utf-8-sig") as f:
+
+    path = "./{}result\\data.csv".format(int_question_num)
+    with open(path, "r", encoding="utf-8-sig") as f:
         while True:
             str_readline = f.readline()
             if str_readline:

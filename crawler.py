@@ -31,9 +31,11 @@ def F_getHtml(headers, num, question_num):
     return html.text
 
 
-def F_saveCsv(str_data):
+def F_saveCsv(str_data, int_question_num):
     ''' 保存数据 '''
-    with open("./data.csv", "a", encoding="utf-8-sig", newline='') as f:
+    path = "./{}result\\data.csv".format(int_question_num)
+
+    with open(path, "a", encoding="utf-8-sig", newline='') as f:
         f_csv_write = csv.writer(f)
         f_csv_write.writerow([str_data])
 
@@ -44,6 +46,8 @@ def F_run(int_question_num):
 
     num = 0
     while True:
+        os.system("cls")
+        print("正在读取{}-{}的回答".format(num, num + 5))
 
         str_html = F_getHtml(headers, num, int_question_num)
         dic_html = json.loads(str_html)
@@ -51,12 +55,9 @@ def F_run(int_question_num):
         for i in range(0, 5):
             try:
                 str_need_data = dic_html["data"][i]["content"]
-                F_saveCsv(str_need_data)
+                F_saveCsv(str_need_data, int_question_num)
             except:
                 pass
-
-        os.system("cls")
-        print("正在读取{}-{}的回答".format(num, num + 5))
 
         if dic_html["paging"]["is_end"]:
             os.system("cls")
