@@ -47,14 +47,16 @@ def F_run(int_question_num):
             else:
                 break
     
-    text = r"，。/《》？！；’：”‘“【】{}、（）的地了吗啊"
+    text = r"，。/《》？！；’：”‘“【】{}、（）的地了吗啊 　"
     for char in text:
         try:
             dic_termsFrequently.pop(char)
         except:
             pass
+    dic_ = dic_termsFrequently.copy()
+    for key in dic_:
+        if len(key) == 1:
+            dic_termsFrequently.pop(key)
+        
     
     return dic_termsFrequently
-
-if __name__ == "__main__":
-    F_run()
